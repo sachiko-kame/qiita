@@ -22,6 +22,11 @@ object APIClient {
         return service.fetchReposList(userName, page).execute()
     }
 
+    fun fetchUser_allReposList() : Response<List<UserRepos>> {
+        val service = restClient().create(QiitaService::class.java)
+        return service.fetchReposList_all("1", "20").execute()
+    }
+
 
     //Github - Post
 }

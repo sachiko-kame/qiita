@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(com.example.qiitasampleproject.R.layout.activity_main)
 
         serchButton.setOnClickListener {
-            val userName = searchUserNameTextView.text.toString()
+            val userName = searchUserNameTextView.text.toString()?: ""
             this.hideKeyboard()
             this.searchArticle(userName)
         }
@@ -46,8 +46,14 @@ class MainActivity : AppCompatActivity() {
         thread {
 
             try {
-                val response = APIClient.fetchUserReposList(userName, "1")
-                firstRepos = response.body()!!
+
+                if(userName != ""){
+                    val response = APIClient.fetchUserReposList(userName, "1")
+                    firstRepos = response.body()!!
+                }else{
+                    val response = APIClient.fetchUser_allReposList()
+                    firstRepos = response.body()!!
+                }
 
                 handler.post(Runnable {
                     val adapter = QiitaUserArticleAdapter(this, firstRepos)

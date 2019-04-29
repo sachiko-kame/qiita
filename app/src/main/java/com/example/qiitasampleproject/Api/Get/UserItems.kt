@@ -9,6 +9,9 @@ import java.util.*
 interface QiitaService {
     @GET("api/v2/users/{userName}/items")
     fun fetchReposList(@Path("userName") userName: String,  @Query("page") page: String): Call<List<UserRepos>>
+
+    @GET("api/v2/items")
+    fun fetchReposList_all(@Query("sort") page: String, @Query("sort") per_page: String): Call<List<UserRepos>>
 }
 
 data class UserRepos(val title: String,
