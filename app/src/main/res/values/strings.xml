@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">QiitaSampleProject</string>
+    <string name="search">検索する</string>
 </resources>
