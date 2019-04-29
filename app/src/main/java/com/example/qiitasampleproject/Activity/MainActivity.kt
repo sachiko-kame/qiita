@@ -22,6 +22,7 @@ import kotlin.concurrent.thread
 */
 
 class MainActivity : AppCompatActivity() {
+    var firstRepos:List<UserRepos> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,12 +33,15 @@ class MainActivity : AppCompatActivity() {
             this.hideKeyboard()
             this.searchArticle(userName)
         }
+
+        serchResultListView.setOnItemClickListener {parent, view, position, id ->
+            println(firstRepos[position].url)
+        }
     }
 
     fun searchArticle(userName:String){
 
         val arrayAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
-        var firstRepos:List<UserRepos> = arrayListOf()
 
         val handler = Handler()
 
