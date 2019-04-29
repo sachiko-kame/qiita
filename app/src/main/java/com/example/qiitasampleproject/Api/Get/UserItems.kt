@@ -11,16 +11,11 @@ interface QiitaService {
 }
 
 data class UserRepos(val title: String,
-                      val url: String,
-                      val comments_count: Int,
-                      val likes_count: Int,
-                      val id: String
-)
+                     val url: String,
+                     val comments_count: Int,
+                     val likes_count: Int,
+                     val id: String,
+                     val user: Object,
+                     val tags: Array<Object>
 
-/*
-*
-*
-* user Object
-* tags Array
-*
-* */
+)

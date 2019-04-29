@@ -47,6 +47,8 @@ class MainActivity : AppCompatActivity() {
                 val response = APIClient.fetchUserReposList(userName, "1")
                 firstRepos = response.body()!!
 
+                println(firstRepos)
+
                 handler.post(Runnable {
                     val count = firstRepos.size
                     for (i in 0..count - 1) {
