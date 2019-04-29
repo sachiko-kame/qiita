@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 handler.post(Runnable {
                     AlertDialog.Builder(this)
-                        .setTitle(e.localizedMessage)
+                        .setTitle("エラーが起きました。")
                         .setPositiveButton("ok") { dialog, which ->
                         }.show()
                 })
