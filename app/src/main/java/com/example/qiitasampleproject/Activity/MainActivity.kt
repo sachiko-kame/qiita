@@ -6,7 +6,7 @@ import android.os.Handler
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.inputmethod.InputMethodManager
-import android.widget.ArrayAdapter
+import com.example.qiitasampleproject.Adapter.QiitaUserArticleAdapter
 import com.example.qiitasampleproject.Api.APIClient
 import com.example.qiitasampleproject.Api.Get.UserRepos
 import kotlinx.android.synthetic.main.activity_main.*
@@ -41,8 +41,6 @@ class MainActivity : AppCompatActivity() {
 
     fun searchArticle(userName:String){
 
-        val arrayAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
-
         val handler = Handler()
 
         thread {
@@ -51,15 +49,9 @@ class MainActivity : AppCompatActivity() {
                 val response = APIClient.fetchUserReposList(userName, "1")
                 firstRepos = response.body()!!
 
-                println(firstRepos)
-
                 handler.post(Runnable {
-                    val count = firstRepos.size
-                    for (i in 0..count - 1) {
-                        arrayAdapter.add(firstRepos[i].title)
-                    }
-
-                    serchResultListView.adapter = arrayAdapter
+                    val adapter = QiitaUserArticleAdapter(this, firstRepos)
+                    serchResultListView.adapter = adapter
                 })
 
             } catch (e: Exception) {
