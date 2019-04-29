@@ -1,6 +1,8 @@
 package com.example.qiitasampleproject.Activity
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AlertDialog
@@ -57,7 +59,11 @@ class MainActivity : AppCompatActivity() {
 
                 handler.post(Runnable {
                     val adapter = QiitaUserArticleAdapter(this, firstRepos)
+                    adapter.onClickWeb = {
+                        this.webOpen(it)
+                    }
                     serchResultListView.adapter = adapter
+
                 })
 
             } catch (e: Exception) {
@@ -71,6 +77,11 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    fun webOpen(url: String){
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
     }
 
     fun hideKeyboard() {

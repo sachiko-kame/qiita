@@ -22,6 +22,7 @@ data class QiitaUserArticleViewHolder(val titleTextView: TextView,
 )
 
 class QiitaUserArticleAdapter(context: Context, items: List<UserRepos>): ArrayAdapter<UserRepos>(context, 0, items)  {
+    public var onClickWeb: ((url:String) -> Unit)? = null
 
     private val layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
@@ -54,6 +55,10 @@ class QiitaUserArticleAdapter(context: Context, items: List<UserRepos>): ArrayAd
         holder.descriptionTextView.text = userData.rendered_body.removehtmlTag().subSequence(0, 150)
         holder.goodTextView.text = "❤ ️" + userData.likes_count.toString()
         holder.commentTextView.text = "✍ ️" + userData.comments_count.toString()
+
+        holder.webGoButton.setOnClickListener { _ ->
+            this.onClickWeb?.invoke(userData.url)
+        }
 
         //これはgif
 //        Glide.with(context)
