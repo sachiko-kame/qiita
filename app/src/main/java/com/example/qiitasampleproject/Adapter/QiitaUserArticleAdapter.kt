@@ -52,7 +52,12 @@ class QiitaUserArticleAdapter(context: Context, items: List<UserRepos>): ArrayAd
 
         val userData = getItem(position) as UserRepos
         holder.titleTextView.text = userData.title
-        holder.descriptionTextView.text = userData.rendered_body.removehtmlTag().subSequence(0, 150)
+        val descriptionText = userData.rendered_body.removehtmlTag()
+        if(descriptionText.length < 200){
+            holder.descriptionTextView.text = descriptionText.subSequence(0, descriptionText.length - 1)
+        }else{
+            holder.descriptionTextView.text = descriptionText.subSequence(0, 200)
+        }
         holder.goodTextView.text = "❤ ️" + userData.likes_count.toString()
         holder.commentTextView.text = "✍ ️" + userData.comments_count.toString()
 
